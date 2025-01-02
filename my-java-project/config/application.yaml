@@ -1,0 +1,42 @@
+limiters:
+ - name: StockLimiter
+   productType: Stock
+   priceCalculation: ByValue
+   scenario: Both
+   threshold: 10.0
+ - name: OptionLimiter
+   productType: Option
+   priceCalculation: ByTick
+   scenario: AtDisadvantage
+   threshold: 8.0
+ - name: FutureLimiter
+   productType: Future
+   priceCalculation: ByPercentage
+   scenario: AtAdvantage
+   threshold: 20.0
+
+tickTable:
+  - instrument: KS200400F5.KS
+    tickConfigs:
+      - min: 0.0
+        tick: 0.01
+        max: 10.0
+      - min: 10.0
+        tick: 0.05
+
+referenceTable:
+  - instrument: KS200400F5.KS
+    productType: Option
+    theoPrice: 8.91
+    lastTradePrice: 8.88
+    closePrice: 8.84
+  - instrument: HSIZ4
+    productType: Future
+    theoPrice: 19000.0
+    lastTradePrice: 19010.0
+    closePrice: 19020.0
+  - instrument: VOD.L
+    productType: Stock
+    theoPrice: 240.0
+    lastTradePrice: 245.0
+    closePrice: 231.0
