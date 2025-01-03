@@ -11,6 +11,13 @@ my-java-project
 │       ├── java
 │       │   └── App.java
 │       └── resources
+├──config
+|   └──application.yaml
+├──data
+|   ├──input
+|   |    └──option.csv
+|   |    └──stock.csv
+|   └──output
 ├── pom.xml
 └── README.md
 ```
