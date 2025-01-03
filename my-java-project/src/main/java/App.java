@@ -12,7 +12,6 @@ public class App {
     public static void main(String[] args) {
         Yaml yaml = new Yaml();
         try {
-            //TODO: change config C:\\Users\\sunki\\Documents\\GitHub\\assessment\\my-java-project\\
             FileReader fileReader = new FileReader(new File("config\\application.yaml"));
             Map<String, Object> configsMap = yaml.loadAs(fileReader, Map.class);
             Config config = new Config(configsMap);
