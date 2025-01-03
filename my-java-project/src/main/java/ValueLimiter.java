@@ -35,7 +35,7 @@ public class ValueLimiter extends Limiter {
         if (Math.abs(difference) < threshold) {
             result.setAlert(Alert.No);
             referenceManagement.updateReferencePrice(transaction.getInstrument(), price);
-            if (difference > 0) {
+            if (difference >= 0) {
                 result.setDescription(String.format(posPassDescription, difference, threshold));
             }
             else {
@@ -52,7 +52,7 @@ public class ValueLimiter extends Limiter {
         }
     
         result.setAlert(Alert.Yes);
-        if (difference > 0) {
+        if (difference >= 0) {
             result.setDescription(String.format(posBlockDescription, difference, threshold));
         }
         else {

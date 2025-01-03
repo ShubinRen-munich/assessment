@@ -26,4 +26,9 @@ public class Transaction {
     public double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(index) + "," + instrument + "," + String.valueOf(side) + "," + String.valueOf(price);
+    }
 }

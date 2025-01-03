@@ -5,7 +5,7 @@ public abstract class Limiter {
     private static final String sellLowerPassDescription = "sell lower, pass";
     public abstract EvaluationResult evaluate(Transaction transaction);
     public EvaluationResult evaluateByScenario(Transaction transaction, Scenario scenario, double diff, double threshold) {
-        EvaluationResult result = evaluate(transaction);
+        EvaluationResult result = new EvaluationResult(transaction);;
         if (scenario == Scenario.AtAdvantage) {
             if (transaction.getSide() == Side.Buy && diff > threshold) {
                 result.setAlert(Alert.No);

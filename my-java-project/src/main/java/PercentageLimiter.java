@@ -48,7 +48,7 @@ public class PercentageLimiter extends Limiter {
         if (Math.abs(ratio) < threshold) {
             result.setAlert(Alert.No);
             referenceManagement.updateReferencePrice(transaction.getInstrument(), price);
-            if (ratio > 0) {
+            if (ratio >= 0) {
                 result.setDescription(String.format(posPassDescription, numberformat.format(ratio), numberformat.format(threshold)));
             }
             else {
@@ -64,7 +64,7 @@ public class PercentageLimiter extends Limiter {
             return res;
         }
         result.setAlert(Alert.Yes);
-        if (ratio > 0) {
+        if (ratio >= 0) {
             result.setDescription(String.format(posBlockDescription, numberformat.format(ratio), numberformat.format(threshold)));
         }
         else {

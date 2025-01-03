@@ -7,6 +7,7 @@ public class ReferenceManagement {
     
     public ReferenceManagement(List<ReferenceEntry> referenceEntries) {
         this.referenceMap = new HashMap<>();
+        this.productTypeMap = new HashMap<>();
         for (ReferenceEntry referenceEntry : referenceEntries) {
             String instrument = referenceEntry.getInstrument();
             double theoPrice = referenceEntry.getTheoPrice();

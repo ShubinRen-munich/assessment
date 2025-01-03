@@ -5,7 +5,8 @@ import java.util.List;
 public class TickLimiter extends Limiter {
 
     private class TickResult {
-        public int tick;
+        public int count;
+        public double tick;
         public double start;
         public double end;
     }
@@ -64,9 +65,9 @@ public class TickLimiter extends Limiter {
         int sum = 0;
         for (TickResult tickResult : tickResults) {
             if (referencePrice > price) {
-                sum += tickResult.tick;
+                sum += tickResult.count;
             } else {
-                sum -= tickResult.tick;
+                sum -= tickResult.count;
             }
         }
         
@@ -74,7 +75,7 @@ public class TickLimiter extends Limiter {
         if (Math.abs(sum) < threshold) {
             result.setAlert(Alert.No);
             referenceManagement.updateReferencePrice(transaction.getInstrument(), price);
-            if (sum > 0) {
+            if (sum >= 0) {
                 result.setDescription(String.format(posPassDescription, sum, threshold));
             } else {
                 result.setDescription(String.format(negPassDescription, sum, threshold));
@@ -90,7 +91,7 @@ public class TickLimiter extends Limiter {
         }
 
         result.setAlert(Alert.Yes);
-        if (sum > 0) {
+        if (sum >= 0) {
             result.setDescription(String.format(posBlockDescription, sum, threshold));
         } else {
             result.setDescription(String.format(negBlockDescription, sum, threshold));
@@ -108,13 +109,15 @@ public class TickLimiter extends Limiter {
             if(tickConfig.getMax() >= end) {
                 tickResult.start = start;
                 tickResult.end = end;
-                tickResult.tick = (int)Math.ceil((end - start) / tickConfig.getTick());
+                tickResult.tick = tickConfig.getTick();
+                tickResult.count = (int)Math.ceil((end - start) / tickConfig.getTick());
                 tickResults.add(tickResult);
                 break;
             }
             tickResult.start = start;
             tickResult.end = tickConfig.getMax();
-            tickResult.tick = (int)Math.ceil((tickConfig.getMax() - start) / tickConfig.getTick());
+            tickResult.tick = tickConfig.getTick();
+            tickResult.count = (int)Math.ceil((tickConfig.getMax() - start) / tickConfig.getTick());
             tickResults.add(tickResult);
             start = tickConfig.getMax();
         }

@@ -38,5 +38,10 @@ public class EvaluationResult {
     public void setDescription(String Description) {
         this.Description = Description;
     }
+
+    @Override
+    public String toString() {
+        return transaction.toString() + "," + String.valueOf(alert) + "," + variation + "," + Description;
+    }
 }
 
